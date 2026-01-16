@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文件格式转换器</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔄 文件格式转换器</h1>
+            <p class="subtitle">快速、安全、便捷的文件格式转换工具</p>
+        </header>
+
+        <div class="cards-grid">
+            <!-- PDF转Word -->
+            <div class="card" data-type="pdf_to_word">
+                <div class="card-icon">📄→📝</div>
+                <h2>PDF转Word</h2>
+                <p>将PDF文档转换为可编辑的Word文档</p>
+                <div class="file-input-wrapper">
+                    <input type="file" id="pdf_to_word_file" accept=".pdf" class="file-input">
+                    <label for="pdf_to_word_file" class="file-label">选择PDF文件</label>
+                </div>
+                <button class="convert-btn" onclick="startConvert('pdf_to_word')">开始转换</button>
+                <div class="progress-container" style="display: none;">
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                    <p class="progress-text">转换中...</p>
+                </div>
+            </div>
+
+            <!-- Word转PDF -->
+            <div class="card" data-type="word_to_pdf">
+                <div class="card-icon">📝→📄</div>
+                <h2>Word转PDF</h2>
+                <p>将Word文档转换为PDF格式</p>
+                <div class="file-input-wrapper">
+                    <input type="file" id="word_to_pdf_file" accept=".docx,.doc" class="file-input">
+                    <label for="word_to_pdf_file" class="file-label">选择Word文件</label>
+                </div>
+                <button class="convert-btn" onclick="startConvert('word_to_pdf')">开始转换</button>
+                <div class="progress-container" style="display: none;">
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                    <p class="progress-text">转换中...</p>
+                </div>
+            </div>
+
+            <!-- PDF转图像 -->
+            <div class="card" data-type="pdf_to_images">
+                <div class="card-icon">📄→🖼️</div>
+                <h2>PDF转图像</h2>
+                <p>将PDF转换为图像文件</p>
+                <div class="file-input-wrapper">
+                    <input type="file" id="pdf_to_images_file" accept=".pdf" class="file-input">
+                    <label for="pdf_to_images_file" class="file-label">选择PDF文件</label>
+                </div>
+                <div class="option-group">
+                    <label class="radio-label">
+                        <input type="radio" name="pdf_to_images_mode" value="zip" checked>
+                        <span>多张图片（ZIP压缩包）</span>
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="pdf_to_images_mode" value="single">
+                        <span>单张大拼图</span>
+                    </label>
+                </div>
+                <button class="convert-btn" onclick="startConvert('pdf_to_images')">开始转换</button>
+                <div class="progress-container" style="display: none;">
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                    <p class="progress-text">转换中...</p>
+                </div>
+            </div>
+
+            <!-- 图像转PDF -->
+            <div class="card" data-type="images_to_pdf">
+                <div class="card-icon">🖼️→📄</div>
+                <h2>图像转PDF</h2>
+                <p>将图像文件转换为PDF文档</p>
+                <div class="file-input-wrapper">
+                    <input type="file" id="images_to_pdf_file" accept=".png,.jpg,.jpeg,.gif,.bmp,.zip" class="file-input" multiple>
+                    <label for="images_to_pdf_file" class="file-label">选择图像文件或ZIP</label>
+                </div>
+                <button class="convert-btn" onclick="startConvert('images_to_pdf')">开始转换</button>
+                <div class="progress-container" style="display: none;">
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                    <p class="progress-text">转换中...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
