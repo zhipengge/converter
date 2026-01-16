@@ -34,6 +34,11 @@ instance/
 uploads/
 outputs/
 
+# 日志和进程文件
+logs/
+*.log
+gunicorn.pid
+
 # IDE
 .vscode/
 .idea/

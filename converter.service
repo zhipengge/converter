@@ -1,0 +1,20 @@
+[Unit]
+Description=文件转换器 Flask 应用
+After=network.target
+
+[Service]
+Type=notify
+User=root
+Group=root
+WorkingDirectory=/root/workspace/converter
+Environment="PATH=/root/.local/share/virtualenvs/converter-*/bin"
+ExecStart=/root/.local/share/virtualenvs/converter-*/bin/gunicorn -c gunicorn_config.py app:app
+ExecReload=/bin/kill -s HUP $MAINPID
+KillMode=mixed
+TimeoutStopSec=5
+PrivateTmp=true
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

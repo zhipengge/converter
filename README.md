@@ -77,7 +77,9 @@ brew install --cask libreoffice
 
 ## 运行项目
 
-### 激活pipenv环境并运行
+### 开发环境运行
+
+**激活pipenv环境并运行:**
 
 ```bash
 pipenv shell
@@ -90,11 +92,29 @@ python app.py
 pipenv run python app.py
 ```
 
+### 生产环境运行（外网访问）
+
+**方式一：快速启动（使用gunicorn）**
+
+```bash
+chmod +x start.sh
+./start.sh
+```
+
+**方式二：完整部署（推荐，使用systemd + nginx）**
+
+```bash
+chmod +x deploy.sh
+sudo ./deploy.sh
+```
+
+详细部署说明请参考 [DEPLOYMENT.md](DEPLOYMENT.md)
+
 ### 访问应用
 
-打开浏览器访问: `http://localhost` (端口80)
-
-**注意**: 如果端口80需要root权限，可以修改 `config.py` 中的端口号为其他端口（如8080）。
+- **开发环境**: `http://localhost:8000`
+- **生产环境（直接访问）**: `http://您的服务器IP:8000`
+- **生产环境（通过nginx）**: `http://您的服务器IP`
 
 ## 项目结构
 
@@ -104,7 +124,14 @@ converter/
 ├── config.py           # 配置文件
 ├── converter.py        # 转换功能实现
 ├── Pipfile             # pipenv依赖配置
+├── requirements.txt    # pip依赖配置
 ├── README.md           # 项目说明
+├── DEPLOYMENT.md       # 外网访问部署指南
+├── gunicorn_config.py  # Gunicorn配置文件
+├── converter.service   # systemd服务文件
+├── nginx.conf          # Nginx反向代理配置
+├── start.sh            # 快速启动脚本
+├── deploy.sh           # 自动部署脚本
 ├── templates/          # HTML模板
 │   └── index.html
 ├── static/             # 静态文件
@@ -113,7 +140,8 @@ converter/
 │   └── js/
 │       └── main.js
 ├── uploads/            # 上传文件目录（自动创建）
-└── outputs/            # 输出文件目录（自动创建）
+├── outputs/            # 输出文件目录（自动创建）
+└── logs/               # 日志目录（自动创建）
 ```
 
 ## 配置说明
